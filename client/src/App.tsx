@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { createDeck } from './api/createDeck';
 import { deleteDeck } from './api/deleteDeck';
-import { getDeck, TDeck } from './api/getDeck';
+import { getDecks, TDeck } from './api/getDecks';
 import './App.css'
 
 function App() {
@@ -28,14 +28,16 @@ function App() {
 //display data in ui
   useEffect(() => {
     async function fetchDecks(){
-      const newDecks = await getDeck();
+      const newDecks = await getDecks();
       setDecks(newDecks);
     };
     fetchDecks();
   }, [])
 
   return (
+    <div className="container">
     <div className="App">
+      <h1>Your Decks</h1>
       <div className="decks">
         {
           decks.map((deck) => (
@@ -64,7 +66,8 @@ function App() {
         <button>Create Deck</button>
       </form>
     </div>
-  )
+    </div>
+  );
 }
 
 export default App
